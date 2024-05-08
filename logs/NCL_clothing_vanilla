@@ -1,0 +1,682 @@
+09 Oct 04:52    INFO ██Server: 	psdz
+09 Oct 04:52    INFO ██Dir: 	/data1/yli/MMRec_base/src
+
+09 Oct 04:52    INFO 
+gpu_id=1
+use_gpu=True
+seed=[999]
+data_path=../data/
+inter_splitting_label=x_label
+filter_out_cod_start_users=True
+is_multimodal_model=True
+checkpoint_dir=saved
+save_recommended_topk=True
+recommend_topk=recommend_topk/
+embedding_size=64
+weight_decay=0.0
+req_training=True
+epochs=1000
+stopping_step=20
+train_batch_size=2048
+learner=adam
+learning_rate=0.001
+learning_rate_scheduler=[1.0, 50]
+eval_step=1
+training_neg_sample_num=1
+use_neg_sampling=True
+use_full_sampling=False
+NEG_PREFIX=neg__
+USER_ID_FIELD=userID
+ITEM_ID_FIELD=itemID
+TIME_FIELD=timestamp
+field_separator=	
+metrics=['Recall', 'NDCG', 'Precision', 'MAP']
+topk=[5, 10, 20, 50]
+valid_metric=Recall@20
+eval_batch_size=4096
+use_raw_features=False
+max_txt_len=32
+max_img_size=256
+vocab_size=30522
+type_vocab_size=2
+hidden_size=4
+pad_token_id=0
+max_position_embeddings=512
+layer_norm_eps=1e-12
+hidden_dropout_prob=0.1
+end2end=False
+hyper_parameters=['seed']
+inter_file_name=clothing.inter
+vision_feature_file=image_feat.npy
+text_feature_file=text_feat.npy
+user_graph_dict_file=user_graph_dict.npy
+n_layers=3
+reg_weight=0.0001
+ssl_temp=0.1
+ssl_reg=1e-07
+hyper_layers=1
+alpha=1.0
+proto_reg=8e-08
+num_clusters=1000
+m_step=1
+warm_up_step=20
+model=NCL
+dataset=clothing
+valid_metric_bigger=True
+device=cuda
+
+
+09 Oct 04:52    INFO clothing
+The number of users: 39387
+Average actions of users: 7.075354812501587
+The number of items: 23033
+Average actions of items: 12.099031823904832
+The number of inters: 278677
+The sparsity of the dataset: 99.969281661909%
+09 Oct 04:52    INFO 
+====Training====
+clothing
+The number of users: 39387
+Average actions of users: 5.010231802371341
+The number of items: 23020
+Average actions of items: 8.572458731537793
+The number of inters: 197338
+The sparsity of the dataset: 99.97823530928596%
+09 Oct 04:52    INFO 
+====Validation====
+clothing
+The number of users: 39387
+Average actions of users: 1.0193718739685682
+The number of items: 16702
+Average actions of items: 2.4039037241048975
+The number of inters: 40150
+The sparsity of the dataset: 99.99389670773579%
+09 Oct 04:52    INFO 
+====Testing====
+clothing
+The number of users: 39387
+Average actions of users: 1.0457511361616778
+The number of items: 16803
+Average actions of items: 2.451288460393977
+The number of inters: 41189
+The sparsity of the dataset: 99.99377640221293%
+09 Oct 04:52    INFO 
+
+=================================
+
+
+09 Oct 04:52    INFO =========1/1: Parameters:['seed']=(999,)=======
+09 Oct 04:52    INFO NCL(
+  (user_embedding): Embedding(39387, 64)
+  (item_embedding): Embedding(23033, 64)
+  (mf_loss): BPRLoss()
+  (reg_loss): EmbLoss()
+)
+Trainable parameters: 3994880
+09 Oct 04:52    INFO Loading faiss with AVX2 support.
+09 Oct 04:52    INFO Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+09 Oct 04:52    INFO Loading faiss.
+09 Oct 04:52    INFO Successfully loaded faiss.
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:52    INFO train_loss1: 67.2154, train_loss2: 0.0996, train_loss3: 0.0507]
+09 Oct 04:52    INFO epoch 0 evaluating [time: 7.77s, valid_score: 0.003400]
+09 Oct 04:52    INFO valid result: 
+recall@5: 0.0014    recall@10: 0.0020    recall@20: 0.0034    recall@50: 0.0067    ndcg@5: 0.0010    ndcg@10: 0.0011    ndcg@20: 0.0015    ndcg@50: 0.0021    precision@5: 0.0003    precision@10: 0.0002    precision@20: 0.0002    precision@50: 0.0001    map@5: 0.0008    map@10: 0.0009    map@20: 0.0010    map@50: 0.0011    
+09 Oct 04:52    INFO test result: 
+recall@5: 0.0014    recall@10: 0.0021    recall@20: 0.0034    recall@50: 0.0068    ndcg@5: 0.0009    ndcg@10: 0.0011    ndcg@20: 0.0014    ndcg@50: 0.0021    precision@5: 0.0003    precision@10: 0.0002    precision@20: 0.0002    precision@50: 0.0001    map@5: 0.0007    map@10: 0.0008    map@20: 0.0009    map@50: 0.0010    
+09 Oct 04:52    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:52    INFO train_loss1: 67.1137, train_loss2: 0.0767, train_loss3: 0.0351]
+09 Oct 04:53    INFO epoch 1 evaluating [time: 8.88s, valid_score: 0.008700]
+09 Oct 04:53    INFO valid result: 
+recall@5: 0.0035    recall@10: 0.0055    recall@20: 0.0087    recall@50: 0.0151    ndcg@5: 0.0024    ndcg@10: 0.0030    ndcg@20: 0.0038    ndcg@50: 0.0051    precision@5: 0.0007    precision@10: 0.0006    precision@20: 0.0004    precision@50: 0.0003    map@5: 0.0020    map@10: 0.0023    map@20: 0.0025    map@50: 0.0027    
+09 Oct 04:53    INFO test result: 
+recall@5: 0.0032    recall@10: 0.0053    recall@20: 0.0091    recall@50: 0.0162    ndcg@5: 0.0021    ndcg@10: 0.0028    ndcg@20: 0.0038    ndcg@50: 0.0052    precision@5: 0.0007    precision@10: 0.0006    precision@20: 0.0005    precision@50: 0.0003    map@5: 0.0017    map@10: 0.0020    map@20: 0.0023    map@50: 0.0025    
+09 Oct 04:53    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:53    INFO train_loss1: 66.4446, train_loss2: 0.0733, train_loss3: 0.0639]
+09 Oct 04:53    INFO epoch 2 evaluating [time: 7.85s, valid_score: 0.023000]
+09 Oct 04:53    INFO valid result: 
+recall@5: 0.0102    recall@10: 0.0155    recall@20: 0.0230    recall@50: 0.0398    ndcg@5: 0.0067    ndcg@10: 0.0084    ndcg@20: 0.0103    ndcg@50: 0.0137    precision@5: 0.0021    precision@10: 0.0016    precision@20: 0.0012    precision@50: 0.0008    map@5: 0.0056    map@10: 0.0063    map@20: 0.0068    map@50: 0.0073    
+09 Oct 04:53    INFO test result: 
+recall@5: 0.0101    recall@10: 0.0155    recall@20: 0.0251    recall@50: 0.0414    ndcg@5: 0.0068    ndcg@10: 0.0085    ndcg@20: 0.0110    ndcg@50: 0.0142    precision@5: 0.0021    precision@10: 0.0016    precision@20: 0.0013    precision@50: 0.0009    map@5: 0.0056    map@10: 0.0063    map@20: 0.0070    map@50: 0.0075    
+09 Oct 04:53    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:53    INFO train_loss1: 63.4421, train_loss2: 0.0859, train_loss3: 0.0844]
+09 Oct 04:53    INFO epoch 3 evaluating [time: 7.67s, valid_score: 0.030400]
+09 Oct 04:53    INFO valid result: 
+recall@5: 0.0131    recall@10: 0.0205    recall@20: 0.0304    recall@50: 0.0526    ndcg@5: 0.0086    ndcg@10: 0.0110    ndcg@20: 0.0135    ndcg@50: 0.0179    precision@5: 0.0026    precision@10: 0.0021    precision@20: 0.0015    precision@50: 0.0011    map@5: 0.0071    map@10: 0.0081    map@20: 0.0088    map@50: 0.0095    
+09 Oct 04:53    INFO test result: 
+recall@5: 0.0135    recall@10: 0.0208    recall@20: 0.0313    recall@50: 0.0520    ndcg@5: 0.0090    ndcg@10: 0.0114    ndcg@20: 0.0140    ndcg@50: 0.0182    precision@5: 0.0028    precision@10: 0.0022    precision@20: 0.0016    precision@50: 0.0011    map@5: 0.0075    map@10: 0.0084    map@20: 0.0091    map@50: 0.0098    
+09 Oct 04:53    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:53    INFO train_loss1: 56.8941, train_loss2: 0.1124, train_loss3: 0.0834]
+09 Oct 04:54    INFO epoch 4 evaluating [time: 7.75s, valid_score: 0.033200]
+09 Oct 04:54    INFO valid result: 
+recall@5: 0.0144    recall@10: 0.0226    recall@20: 0.0332    recall@50: 0.0576    ndcg@5: 0.0094    ndcg@10: 0.0120    ndcg@20: 0.0147    ndcg@50: 0.0196    precision@5: 0.0029    precision@10: 0.0023    precision@20: 0.0017    precision@50: 0.0012    map@5: 0.0078    map@10: 0.0088    map@20: 0.0095    map@50: 0.0103    
+09 Oct 04:54    INFO test result: 
+recall@5: 0.0142    recall@10: 0.0222    recall@20: 0.0341    recall@50: 0.0570    ndcg@5: 0.0094    ndcg@10: 0.0120    ndcg@20: 0.0150    ndcg@50: 0.0195    precision@5: 0.0030    precision@10: 0.0023    precision@20: 0.0018    precision@50: 0.0012    map@5: 0.0077    map@10: 0.0087    map@20: 0.0095    map@50: 0.0103    
+09 Oct 04:54    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:54    INFO train_loss1: 48.4765, train_loss2: 0.1350, train_loss3: 0.0875]
+09 Oct 04:54    INFO epoch 5 evaluating [time: 7.58s, valid_score: 0.034900]
+09 Oct 04:54    INFO valid result: 
+recall@5: 0.0151    recall@10: 0.0235    recall@20: 0.0349    recall@50: 0.0597    ndcg@5: 0.0098    ndcg@10: 0.0125    ndcg@20: 0.0153    ndcg@50: 0.0203    precision@5: 0.0031    precision@10: 0.0024    precision@20: 0.0018    precision@50: 0.0012    map@5: 0.0080    map@10: 0.0091    map@20: 0.0099    map@50: 0.0106    
+09 Oct 04:54    INFO test result: 
+recall@5: 0.0144    recall@10: 0.0234    recall@20: 0.0359    recall@50: 0.0598    ndcg@5: 0.0095    ndcg@10: 0.0123    ndcg@20: 0.0155    ndcg@50: 0.0203    precision@5: 0.0030    precision@10: 0.0024    precision@20: 0.0019    precision@50: 0.0013    map@5: 0.0077    map@10: 0.0089    map@20: 0.0097    map@50: 0.0105    
+09 Oct 04:54    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:54    INFO train_loss1: 40.7267, train_loss2: 0.1476, train_loss3: 0.0913]
+09 Oct 04:54    INFO epoch 6 evaluating [time: 9.66s, valid_score: 0.036300]
+09 Oct 04:54    INFO valid result: 
+recall@5: 0.0155    recall@10: 0.0241    recall@20: 0.0363    recall@50: 0.0621    ndcg@5: 0.0100    ndcg@10: 0.0128    ndcg@20: 0.0159    ndcg@50: 0.0210    precision@5: 0.0031    precision@10: 0.0024    precision@20: 0.0018    precision@50: 0.0013    map@5: 0.0082    map@10: 0.0094    map@20: 0.0102    map@50: 0.0110    
+09 Oct 04:54    INFO test result: 
+recall@5: 0.0150    recall@10: 0.0244    recall@20: 0.0373    recall@50: 0.0631    ndcg@5: 0.0098    ndcg@10: 0.0128    ndcg@20: 0.0161    ndcg@50: 0.0212    precision@5: 0.0031    precision@10: 0.0026    precision@20: 0.0020    precision@50: 0.0013    map@5: 0.0080    map@10: 0.0092    map@20: 0.0101    map@50: 0.0109    
+09 Oct 04:54    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:55    INFO train_loss1: 34.4958, train_loss2: 0.1531, train_loss3: 0.0934]
+09 Oct 04:55    INFO epoch 7 evaluating [time: 8.62s, valid_score: 0.037400]
+09 Oct 04:55    INFO valid result: 
+recall@5: 0.0157    recall@10: 0.0247    recall@20: 0.0374    recall@50: 0.0640    ndcg@5: 0.0103    ndcg@10: 0.0132    ndcg@20: 0.0164    ndcg@50: 0.0217    precision@5: 0.0032    precision@10: 0.0025    precision@20: 0.0019    precision@50: 0.0013    map@5: 0.0085    map@10: 0.0097    map@20: 0.0106    map@50: 0.0114    
+09 Oct 04:55    INFO test result: 
+recall@5: 0.0157    recall@10: 0.0250    recall@20: 0.0388    recall@50: 0.0650    ndcg@5: 0.0102    ndcg@10: 0.0132    ndcg@20: 0.0167    ndcg@50: 0.0219    precision@5: 0.0033    precision@10: 0.0026    precision@20: 0.0020    precision@50: 0.0014    map@5: 0.0083    map@10: 0.0095    map@20: 0.0105    map@50: 0.0113    
+09 Oct 04:55    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:55    INFO train_loss1: 29.6147, train_loss2: 0.1548, train_loss3: 0.0939]
+09 Oct 04:55    INFO epoch 8 evaluating [time: 7.48s, valid_score: 0.038200]
+09 Oct 04:55    INFO valid result: 
+recall@5: 0.0160    recall@10: 0.0253    recall@20: 0.0382    recall@50: 0.0656    ndcg@5: 0.0105    ndcg@10: 0.0135    ndcg@20: 0.0168    ndcg@50: 0.0222    precision@5: 0.0032    precision@10: 0.0026    precision@20: 0.0019    precision@50: 0.0013    map@5: 0.0087    map@10: 0.0099    map@20: 0.0108    map@50: 0.0117    
+09 Oct 04:55    INFO test result: 
+recall@5: 0.0159    recall@10: 0.0255    recall@20: 0.0398    recall@50: 0.0668    ndcg@5: 0.0104    ndcg@10: 0.0135    ndcg@20: 0.0172    ndcg@50: 0.0225    precision@5: 0.0033    precision@10: 0.0027    precision@20: 0.0021    precision@50: 0.0014    map@5: 0.0085    map@10: 0.0097    map@20: 0.0107    map@50: 0.0116    
+09 Oct 04:55    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:55    INFO train_loss1: 25.7842, train_loss2: 0.1544, train_loss3: 0.0939]
+09 Oct 04:55    INFO epoch 9 evaluating [time: 7.94s, valid_score: 0.039200]
+09 Oct 04:55    INFO valid result: 
+recall@5: 0.0164    recall@10: 0.0258    recall@20: 0.0392    recall@50: 0.0673    ndcg@5: 0.0108    ndcg@10: 0.0139    ndcg@20: 0.0172    ndcg@50: 0.0228    precision@5: 0.0033    precision@10: 0.0026    precision@20: 0.0020    precision@50: 0.0014    map@5: 0.0089    map@10: 0.0102    map@20: 0.0111    map@50: 0.0120    
+09 Oct 04:55    INFO test result: 
+recall@5: 0.0163    recall@10: 0.0263    recall@20: 0.0409    recall@50: 0.0679    ndcg@5: 0.0107    ndcg@10: 0.0139    ndcg@20: 0.0176    ndcg@50: 0.0230    precision@5: 0.0034    precision@10: 0.0028    precision@20: 0.0021    precision@50: 0.0014    map@5: 0.0088    map@10: 0.0101    map@20: 0.0111    map@50: 0.0119    
+09 Oct 04:55    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:56    INFO train_loss1: 22.6189, train_loss2: 0.1529, train_loss3: 0.0932]
+09 Oct 04:56    INFO epoch 10 evaluating [time: 9.23s, valid_score: 0.039800]
+09 Oct 04:56    INFO valid result: 
+recall@5: 0.0169    recall@10: 0.0265    recall@20: 0.0398    recall@50: 0.0688    ndcg@5: 0.0112    ndcg@10: 0.0142    ndcg@20: 0.0176    ndcg@50: 0.0234    precision@5: 0.0034    precision@10: 0.0027    precision@20: 0.0020    precision@50: 0.0014    map@5: 0.0092    map@10: 0.0105    map@20: 0.0114    map@50: 0.0123    
+09 Oct 04:56    INFO test result: 
+recall@5: 0.0165    recall@10: 0.0271    recall@20: 0.0412    recall@50: 0.0691    ndcg@5: 0.0109    ndcg@10: 0.0143    ndcg@20: 0.0179    ndcg@50: 0.0235    precision@5: 0.0035    precision@10: 0.0028    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0089    map@10: 0.0103    map@20: 0.0113    map@50: 0.0121    
+09 Oct 04:56    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:56    INFO train_loss1: 20.0553, train_loss2: 0.1506, train_loss3: 0.0925]
+09 Oct 04:56    INFO epoch 11 evaluating [time: 8.26s, valid_score: 0.040600]
+09 Oct 04:56    INFO valid result: 
+recall@5: 0.0173    recall@10: 0.0272    recall@20: 0.0406    recall@50: 0.0702    ndcg@5: 0.0115    ndcg@10: 0.0146    ndcg@20: 0.0180    ndcg@50: 0.0239    precision@5: 0.0035    precision@10: 0.0028    precision@20: 0.0021    precision@50: 0.0014    map@5: 0.0095    map@10: 0.0108    map@20: 0.0117    map@50: 0.0126    
+09 Oct 04:56    INFO test result: 
+recall@5: 0.0168    recall@10: 0.0273    recall@20: 0.0419    recall@50: 0.0702    ndcg@5: 0.0112    ndcg@10: 0.0146    ndcg@20: 0.0183    ndcg@50: 0.0240    precision@5: 0.0035    precision@10: 0.0029    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0092    map@10: 0.0106    map@20: 0.0116    map@50: 0.0125    
+09 Oct 04:56    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:56    INFO train_loss1: 17.9251, train_loss2: 0.1480, train_loss3: 0.0916]
+09 Oct 04:57    INFO epoch 12 evaluating [time: 8.28s, valid_score: 0.041500]
+09 Oct 04:57    INFO valid result: 
+recall@5: 0.0176    recall@10: 0.0273    recall@20: 0.0415    recall@50: 0.0713    ndcg@5: 0.0116    ndcg@10: 0.0147    ndcg@20: 0.0183    ndcg@50: 0.0243    precision@5: 0.0036    precision@10: 0.0028    precision@20: 0.0021    precision@50: 0.0014    map@5: 0.0096    map@10: 0.0109    map@20: 0.0119    map@50: 0.0128    
+09 Oct 04:57    INFO test result: 
+recall@5: 0.0171    recall@10: 0.0278    recall@20: 0.0429    recall@50: 0.0720    ndcg@5: 0.0114    ndcg@10: 0.0149    ndcg@20: 0.0187    ndcg@50: 0.0245    precision@5: 0.0036    precision@10: 0.0029    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0094    map@10: 0.0108    map@20: 0.0118    map@50: 0.0127    
+09 Oct 04:57    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:57    INFO train_loss1: 16.0148, train_loss2: 0.1453, train_loss3: 0.0908]
+09 Oct 04:57    INFO epoch 13 evaluating [time: 7.50s, valid_score: 0.042600]
+09 Oct 04:57    INFO valid result: 
+recall@5: 0.0180    recall@10: 0.0275    recall@20: 0.0426    recall@50: 0.0722    ndcg@5: 0.0119    ndcg@10: 0.0150    ndcg@20: 0.0188    ndcg@50: 0.0247    precision@5: 0.0036    precision@10: 0.0028    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0099    map@10: 0.0111    map@20: 0.0121    map@50: 0.0131    
+09 Oct 04:57    INFO test result: 
+recall@5: 0.0176    recall@10: 0.0281    recall@20: 0.0436    recall@50: 0.0730    ndcg@5: 0.0117    ndcg@10: 0.0151    ndcg@20: 0.0191    ndcg@50: 0.0249    precision@5: 0.0037    precision@10: 0.0029    precision@20: 0.0023    precision@50: 0.0015    map@5: 0.0097    map@10: 0.0111    map@20: 0.0121    map@50: 0.0130    
+09 Oct 04:57    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:57    INFO train_loss1: 14.3827, train_loss2: 0.1426, train_loss3: 0.0899]
+09 Oct 04:57    INFO epoch 14 evaluating [time: 7.66s, valid_score: 0.043200]
+09 Oct 04:57    INFO valid result: 
+recall@5: 0.0183    recall@10: 0.0278    recall@20: 0.0432    recall@50: 0.0727    ndcg@5: 0.0120    ndcg@10: 0.0151    ndcg@20: 0.0190    ndcg@50: 0.0249    precision@5: 0.0037    precision@10: 0.0028    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0100    map@10: 0.0112    map@20: 0.0122    map@50: 0.0132    
+09 Oct 04:57    INFO test result: 
+recall@5: 0.0180    recall@10: 0.0284    recall@20: 0.0442    recall@50: 0.0733    ndcg@5: 0.0120    ndcg@10: 0.0155    ndcg@20: 0.0194    ndcg@50: 0.0252    precision@5: 0.0038    precision@10: 0.0030    precision@20: 0.0023    precision@50: 0.0015    map@5: 0.0100    map@10: 0.0114    map@20: 0.0124    map@50: 0.0133    
+09 Oct 04:57    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:57    INFO train_loss1: 13.0526, train_loss2: 0.1400, train_loss3: 0.0889]
+09 Oct 04:57    INFO epoch 15 evaluating [time: 8.33s, valid_score: 0.043700]
+09 Oct 04:57    INFO valid result: 
+recall@5: 0.0184    recall@10: 0.0285    recall@20: 0.0437    recall@50: 0.0738    ndcg@5: 0.0121    ndcg@10: 0.0154    ndcg@20: 0.0192    ndcg@50: 0.0252    precision@5: 0.0037    precision@10: 0.0029    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0100    map@10: 0.0114    map@20: 0.0124    map@50: 0.0133    
+09 Oct 04:57    INFO test result: 
+recall@5: 0.0182    recall@10: 0.0289    recall@20: 0.0448    recall@50: 0.0739    ndcg@5: 0.0121    ndcg@10: 0.0156    ndcg@20: 0.0197    ndcg@50: 0.0255    precision@5: 0.0038    precision@10: 0.0030    precision@20: 0.0023    precision@50: 0.0015    map@5: 0.0100    map@10: 0.0115    map@20: 0.0125    map@50: 0.0134    
+09 Oct 04:57    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:58    INFO train_loss1: 11.8623, train_loss2: 0.1374, train_loss3: 0.0881]
+09 Oct 04:58    INFO epoch 16 evaluating [time: 8.39s, valid_score: 0.044200]
+09 Oct 04:58    INFO valid result: 
+recall@5: 0.0186    recall@10: 0.0289    recall@20: 0.0442    recall@50: 0.0743    ndcg@5: 0.0123    ndcg@10: 0.0155    ndcg@20: 0.0194    ndcg@50: 0.0254    precision@5: 0.0038    precision@10: 0.0029    precision@20: 0.0022    precision@50: 0.0015    map@5: 0.0101    map@10: 0.0115    map@20: 0.0125    map@50: 0.0135    
+09 Oct 04:58    INFO test result: 
+recall@5: 0.0184    recall@10: 0.0289    recall@20: 0.0451    recall@50: 0.0747    ndcg@5: 0.0123    ndcg@10: 0.0157    ndcg@20: 0.0199    ndcg@50: 0.0258    precision@5: 0.0039    precision@10: 0.0030    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0102    map@10: 0.0116    map@20: 0.0127    map@50: 0.0136    
+09 Oct 04:58    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:58    INFO train_loss1: 10.8103, train_loss2: 0.1348, train_loss3: 0.0874]
+09 Oct 04:58    INFO epoch 17 evaluating [time: 8.88s, valid_score: 0.044800]
+09 Oct 04:58    INFO valid result: 
+recall@5: 0.0188    recall@10: 0.0292    recall@20: 0.0448    recall@50: 0.0752    ndcg@5: 0.0124    ndcg@10: 0.0157    ndcg@20: 0.0197    ndcg@50: 0.0257    precision@5: 0.0038    precision@10: 0.0030    precision@20: 0.0023    precision@50: 0.0015    map@5: 0.0102    map@10: 0.0116    map@20: 0.0127    map@50: 0.0136    
+09 Oct 04:58    INFO test result: 
+recall@5: 0.0187    recall@10: 0.0291    recall@20: 0.0460    recall@50: 0.0756    ndcg@5: 0.0126    ndcg@10: 0.0160    ndcg@20: 0.0202    ndcg@50: 0.0261    precision@5: 0.0039    precision@10: 0.0031    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0104    map@10: 0.0118    map@20: 0.0130    map@50: 0.0139    
+09 Oct 04:58    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:58    INFO train_loss1: 9.9276, train_loss2: 0.1324, train_loss3: 0.0867]
+09 Oct 04:59    INFO epoch 18 evaluating [time: 8.77s, valid_score: 0.045600]
+09 Oct 04:59    INFO valid result: 
+recall@5: 0.0188    recall@10: 0.0295    recall@20: 0.0456    recall@50: 0.0758    ndcg@5: 0.0124    ndcg@10: 0.0159    ndcg@20: 0.0199    ndcg@50: 0.0259    precision@5: 0.0038    precision@10: 0.0030    precision@20: 0.0023    precision@50: 0.0015    map@5: 0.0103    map@10: 0.0117    map@20: 0.0128    map@50: 0.0137    
+09 Oct 04:59    INFO test result: 
+recall@5: 0.0191    recall@10: 0.0298    recall@20: 0.0464    recall@50: 0.0761    ndcg@5: 0.0129    ndcg@10: 0.0163    ndcg@20: 0.0206    ndcg@50: 0.0265    precision@5: 0.0040    precision@10: 0.0031    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0107    map@10: 0.0121    map@20: 0.0132    map@50: 0.0141    
+09 Oct 04:59    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:59    INFO train_loss1: 9.0888, train_loss2: 0.1300, train_loss3: 0.0859]
+09 Oct 04:59    INFO epoch 19 evaluating [time: 8.11s, valid_score: 0.045600]
+09 Oct 04:59    INFO valid result: 
+recall@5: 0.0189    recall@10: 0.0299    recall@20: 0.0456    recall@50: 0.0764    ndcg@5: 0.0125    ndcg@10: 0.0161    ndcg@20: 0.0200    ndcg@50: 0.0262    precision@5: 0.0038    precision@10: 0.0030    precision@20: 0.0023    precision@50: 0.0016    map@5: 0.0104    map@10: 0.0118    map@20: 0.0129    map@50: 0.0139    
+09 Oct 04:59    INFO test result: 
+recall@5: 0.0193    recall@10: 0.0302    recall@20: 0.0466    recall@50: 0.0767    ndcg@5: 0.0131    ndcg@10: 0.0166    ndcg@20: 0.0207    ndcg@50: 0.0267    precision@5: 0.0040    precision@10: 0.0032    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0109    map@10: 0.0123    map@20: 0.0134    map@50: 0.0144    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:59    INFO train_loss1: 8.3007, train_loss2: 0.1279, train_loss3: 0.0853]
+09 Oct 04:59    INFO epoch 20 evaluating [time: 7.17s, valid_score: 0.046200]
+09 Oct 04:59    INFO valid result: 
+recall@5: 0.0191    recall@10: 0.0303    recall@20: 0.0462    recall@50: 0.0769    ndcg@5: 0.0127    ndcg@10: 0.0163    ndcg@20: 0.0203    ndcg@50: 0.0264    precision@5: 0.0039    precision@10: 0.0031    precision@20: 0.0023    precision@50: 0.0016    map@5: 0.0105    map@10: 0.0120    map@20: 0.0131    map@50: 0.0141    
+09 Oct 04:59    INFO test result: 
+recall@5: 0.0195    recall@10: 0.0305    recall@20: 0.0472    recall@50: 0.0769    ndcg@5: 0.0131    ndcg@10: 0.0167    ndcg@20: 0.0209    ndcg@50: 0.0269    precision@5: 0.0041    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0109    map@10: 0.0124    map@20: 0.0135    map@50: 0.0144    
+09 Oct 04:59    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 04:59    INFO train_loss1: 7.7449, train_loss2: 0.1258, train_loss3: 0.0847]
+09 Oct 05:00    INFO epoch 21 evaluating [time: 7.16s, valid_score: 0.046500]
+09 Oct 05:00    INFO valid result: 
+recall@5: 0.0193    recall@10: 0.0305    recall@20: 0.0465    recall@50: 0.0774    ndcg@5: 0.0128    ndcg@10: 0.0165    ndcg@20: 0.0205    ndcg@50: 0.0266    precision@5: 0.0039    precision@10: 0.0031    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0107    map@10: 0.0122    map@20: 0.0133    map@50: 0.0142    
+09 Oct 05:00    INFO test result: 
+recall@5: 0.0195    recall@10: 0.0307    recall@20: 0.0476    recall@50: 0.0772    ndcg@5: 0.0132    ndcg@10: 0.0168    ndcg@20: 0.0211    ndcg@50: 0.0270    precision@5: 0.0041    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0110    map@10: 0.0124    map@20: 0.0136    map@50: 0.0145    
+09 Oct 05:00    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:00    INFO train_loss1: 7.1203, train_loss2: 0.1237, train_loss3: 0.0840]
+09 Oct 05:00    INFO epoch 22 evaluating [time: 8.34s, valid_score: 0.046700]
+09 Oct 05:00    INFO valid result: 
+recall@5: 0.0194    recall@10: 0.0308    recall@20: 0.0467    recall@50: 0.0779    ndcg@5: 0.0129    ndcg@10: 0.0166    ndcg@20: 0.0206    ndcg@50: 0.0268    precision@5: 0.0039    precision@10: 0.0031    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0107    map@10: 0.0122    map@20: 0.0133    map@50: 0.0143    
+09 Oct 05:00    INFO test result: 
+recall@5: 0.0199    recall@10: 0.0309    recall@20: 0.0478    recall@50: 0.0778    ndcg@5: 0.0134    ndcg@10: 0.0170    ndcg@20: 0.0212    ndcg@50: 0.0272    precision@5: 0.0042    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0111    map@10: 0.0126    map@20: 0.0137    map@50: 0.0146    
+09 Oct 05:00    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:00    INFO train_loss1: 6.5389, train_loss2: 0.1219, train_loss3: 0.0838]
+09 Oct 05:00    INFO epoch 23 evaluating [time: 7.29s, valid_score: 0.047100]
+09 Oct 05:00    INFO valid result: 
+recall@5: 0.0195    recall@10: 0.0308    recall@20: 0.0471    recall@50: 0.0782    ndcg@5: 0.0130    ndcg@10: 0.0166    ndcg@20: 0.0207    ndcg@50: 0.0269    precision@5: 0.0040    precision@10: 0.0031    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0108    map@10: 0.0123    map@20: 0.0134    map@50: 0.0144    
+09 Oct 05:00    INFO test result: 
+recall@5: 0.0199    recall@10: 0.0311    recall@20: 0.0481    recall@50: 0.0781    ndcg@5: 0.0135    ndcg@10: 0.0171    ndcg@20: 0.0214    ndcg@50: 0.0274    precision@5: 0.0042    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0112    map@10: 0.0127    map@20: 0.0138    map@50: 0.0148    
+09 Oct 05:00    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:00    INFO train_loss1: 6.1018, train_loss2: 0.1201, train_loss3: 0.0833]
+09 Oct 05:01    INFO epoch 24 evaluating [time: 7.59s, valid_score: 0.047500]
+09 Oct 05:01    INFO valid result: 
+recall@5: 0.0197    recall@10: 0.0309    recall@20: 0.0475    recall@50: 0.0786    ndcg@5: 0.0131    ndcg@10: 0.0167    ndcg@20: 0.0209    ndcg@50: 0.0271    precision@5: 0.0040    precision@10: 0.0031    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0109    map@10: 0.0124    map@20: 0.0135    map@50: 0.0145    
+09 Oct 05:01    INFO test result: 
+recall@5: 0.0201    recall@10: 0.0315    recall@20: 0.0484    recall@50: 0.0784    ndcg@5: 0.0135    ndcg@10: 0.0172    ndcg@20: 0.0215    ndcg@50: 0.0275    precision@5: 0.0042    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0112    map@10: 0.0127    map@20: 0.0139    map@50: 0.0148    
+09 Oct 05:01    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:01    INFO train_loss1: 5.7173, train_loss2: 0.1184, train_loss3: 0.0827]
+09 Oct 05:01    INFO epoch 25 evaluating [time: 7.44s, valid_score: 0.047800]
+09 Oct 05:01    INFO valid result: 
+recall@5: 0.0198    recall@10: 0.0312    recall@20: 0.0478    recall@50: 0.0788    ndcg@5: 0.0132    ndcg@10: 0.0169    ndcg@20: 0.0211    ndcg@50: 0.0272    precision@5: 0.0040    precision@10: 0.0032    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0110    map@10: 0.0125    map@20: 0.0136    map@50: 0.0146    
+09 Oct 05:01    INFO test result: 
+recall@5: 0.0202    recall@10: 0.0315    recall@20: 0.0484    recall@50: 0.0788    ndcg@5: 0.0136    ndcg@10: 0.0173    ndcg@20: 0.0216    ndcg@50: 0.0277    precision@5: 0.0042    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0113    map@10: 0.0128    map@20: 0.0140    map@50: 0.0149    
+09 Oct 05:01    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:01    INFO train_loss1: 5.2822, train_loss2: 0.1168, train_loss3: 0.0824]
+09 Oct 05:01    INFO epoch 26 evaluating [time: 7.17s, valid_score: 0.048000]
+09 Oct 05:01    INFO valid result: 
+recall@5: 0.0201    recall@10: 0.0316    recall@20: 0.0480    recall@50: 0.0789    ndcg@5: 0.0133    ndcg@10: 0.0170    ndcg@20: 0.0211    ndcg@50: 0.0273    precision@5: 0.0041    precision@10: 0.0032    precision@20: 0.0024    precision@50: 0.0016    map@5: 0.0110    map@10: 0.0125    map@20: 0.0137    map@50: 0.0146    
+09 Oct 05:01    INFO test result: 
+recall@5: 0.0201    recall@10: 0.0316    recall@20: 0.0485    recall@50: 0.0793    ndcg@5: 0.0137    ndcg@10: 0.0174    ndcg@20: 0.0217    ndcg@50: 0.0278    precision@5: 0.0042    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0114    map@10: 0.0129    map@20: 0.0141    map@50: 0.0150    
+09 Oct 05:01    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:01    INFO train_loss1: 4.9752, train_loss2: 0.1153, train_loss3: 0.0820]
+09 Oct 05:02    INFO epoch 27 evaluating [time: 7.79s, valid_score: 0.048500]
+09 Oct 05:02    INFO valid result: 
+recall@5: 0.0201    recall@10: 0.0316    recall@20: 0.0485    recall@50: 0.0796    ndcg@5: 0.0133    ndcg@10: 0.0170    ndcg@20: 0.0213    ndcg@50: 0.0275    precision@5: 0.0041    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0110    map@10: 0.0126    map@20: 0.0137    map@50: 0.0147    
+09 Oct 05:02    INFO test result: 
+recall@5: 0.0203    recall@10: 0.0317    recall@20: 0.0489    recall@50: 0.0798    ndcg@5: 0.0138    ndcg@10: 0.0175    ndcg@20: 0.0219    ndcg@50: 0.0281    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0115    map@10: 0.0130    map@20: 0.0142    map@50: 0.0152    
+09 Oct 05:02    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:02    INFO train_loss1: 4.6212, train_loss2: 0.1138, train_loss3: 0.0816]
+09 Oct 05:02    INFO epoch 28 evaluating [time: 7.89s, valid_score: 0.048600]
+09 Oct 05:02    INFO valid result: 
+recall@5: 0.0203    recall@10: 0.0318    recall@20: 0.0486    recall@50: 0.0799    ndcg@5: 0.0135    ndcg@10: 0.0172    ndcg@20: 0.0214    ndcg@50: 0.0276    precision@5: 0.0041    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0112    map@10: 0.0127    map@20: 0.0139    map@50: 0.0149    
+09 Oct 05:02    INFO test result: 
+recall@5: 0.0204    recall@10: 0.0319    recall@20: 0.0493    recall@50: 0.0799    ndcg@5: 0.0139    ndcg@10: 0.0176    ndcg@20: 0.0220    ndcg@50: 0.0281    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0116    map@10: 0.0131    map@20: 0.0143    map@50: 0.0153    
+09 Oct 05:02    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:02    INFO train_loss1: 4.3848, train_loss2: 0.1124, train_loss3: 0.0815]
+09 Oct 05:02    INFO epoch 29 evaluating [time: 7.98s, valid_score: 0.048900]
+09 Oct 05:02    INFO valid result: 
+recall@5: 0.0207    recall@10: 0.0319    recall@20: 0.0489    recall@50: 0.0800    ndcg@5: 0.0136    ndcg@10: 0.0172    ndcg@20: 0.0215    ndcg@50: 0.0277    precision@5: 0.0042    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0113    map@10: 0.0127    map@20: 0.0139    map@50: 0.0149    
+09 Oct 05:02    INFO test result: 
+recall@5: 0.0205    recall@10: 0.0320    recall@20: 0.0493    recall@50: 0.0800    ndcg@5: 0.0139    ndcg@10: 0.0176    ndcg@20: 0.0220    ndcg@50: 0.0282    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0116    map@10: 0.0131    map@20: 0.0143    map@50: 0.0153    
+09 Oct 05:02    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:02    INFO train_loss1: 4.0735, train_loss2: 0.1110, train_loss3: 0.0811]
+09 Oct 05:03    INFO epoch 30 evaluating [time: 8.36s, valid_score: 0.049100]
+09 Oct 05:03    INFO valid result: 
+recall@5: 0.0209    recall@10: 0.0319    recall@20: 0.0491    recall@50: 0.0801    ndcg@5: 0.0138    ndcg@10: 0.0173    ndcg@20: 0.0216    ndcg@50: 0.0278    precision@5: 0.0042    precision@10: 0.0032    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0114    map@10: 0.0129    map@20: 0.0140    map@50: 0.0150    
+09 Oct 05:03    INFO test result: 
+recall@5: 0.0206    recall@10: 0.0318    recall@20: 0.0493    recall@50: 0.0800    ndcg@5: 0.0140    ndcg@10: 0.0177    ndcg@20: 0.0221    ndcg@50: 0.0282    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0117    map@10: 0.0132    map@20: 0.0144    map@50: 0.0154    
+09 Oct 05:03    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:03    INFO train_loss1: 3.8473, train_loss2: 0.1098, train_loss3: 0.0809]
+09 Oct 05:03    INFO epoch 31 evaluating [time: 7.12s, valid_score: 0.049300]
+09 Oct 05:03    INFO valid result: 
+recall@5: 0.0210    recall@10: 0.0322    recall@20: 0.0493    recall@50: 0.0809    ndcg@5: 0.0138    ndcg@10: 0.0174    ndcg@20: 0.0217    ndcg@50: 0.0280    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0114    map@10: 0.0129    map@20: 0.0140    map@50: 0.0150    
+09 Oct 05:03    INFO test result: 
+recall@5: 0.0206    recall@10: 0.0320    recall@20: 0.0497    recall@50: 0.0801    ndcg@5: 0.0141    ndcg@10: 0.0178    ndcg@20: 0.0223    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0118    map@10: 0.0133    map@20: 0.0145    map@50: 0.0155    
+09 Oct 05:03    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:03    INFO train_loss1: 3.6268, train_loss2: 0.1085, train_loss3: 0.0807]
+09 Oct 05:03    INFO epoch 32 evaluating [time: 8.33s, valid_score: 0.049100]
+09 Oct 05:03    INFO valid result: 
+recall@5: 0.0210    recall@10: 0.0324    recall@20: 0.0491    recall@50: 0.0809    ndcg@5: 0.0138    ndcg@10: 0.0175    ndcg@20: 0.0217    ndcg@50: 0.0280    precision@5: 0.0042    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0115    map@10: 0.0130    map@20: 0.0141    map@50: 0.0151    
+09 Oct 05:03    INFO test result: 
+recall@5: 0.0207    recall@10: 0.0320    recall@20: 0.0496    recall@50: 0.0804    ndcg@5: 0.0141    ndcg@10: 0.0178    ndcg@20: 0.0223    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0118    map@10: 0.0133    map@20: 0.0145    map@50: 0.0155    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:03    INFO train_loss1: 3.3963, train_loss2: 0.1074, train_loss3: 0.0805]
+09 Oct 05:04    INFO epoch 33 evaluating [time: 8.54s, valid_score: 0.049000]
+09 Oct 05:04    INFO valid result: 
+recall@5: 0.0211    recall@10: 0.0324    recall@20: 0.0490    recall@50: 0.0808    ndcg@5: 0.0139    ndcg@10: 0.0176    ndcg@20: 0.0218    ndcg@50: 0.0281    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0115    map@10: 0.0130    map@20: 0.0142    map@50: 0.0152    
+09 Oct 05:04    INFO test result: 
+recall@5: 0.0207    recall@10: 0.0322    recall@20: 0.0498    recall@50: 0.0801    ndcg@5: 0.0142    ndcg@10: 0.0179    ndcg@20: 0.0224    ndcg@50: 0.0285    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0119    map@10: 0.0134    map@20: 0.0146    map@50: 0.0156    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:04    INFO train_loss1: 3.1586, train_loss2: 0.1063, train_loss3: 0.0803]
+09 Oct 05:04    INFO epoch 34 evaluating [time: 8.21s, valid_score: 0.049000]
+09 Oct 05:04    INFO valid result: 
+recall@5: 0.0211    recall@10: 0.0324    recall@20: 0.0490    recall@50: 0.0808    ndcg@5: 0.0140    ndcg@10: 0.0176    ndcg@20: 0.0218    ndcg@50: 0.0281    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0116    map@10: 0.0131    map@20: 0.0142    map@50: 0.0152    
+09 Oct 05:04    INFO test result: 
+recall@5: 0.0207    recall@10: 0.0323    recall@20: 0.0500    recall@50: 0.0804    ndcg@5: 0.0142    ndcg@10: 0.0180    ndcg@20: 0.0225    ndcg@50: 0.0286    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0120    map@10: 0.0135    map@20: 0.0147    map@50: 0.0157    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:04    INFO train_loss1: 3.0154, train_loss2: 0.1053, train_loss3: 0.0802]
+09 Oct 05:04    INFO epoch 35 evaluating [time: 7.73s, valid_score: 0.049100]
+09 Oct 05:04    INFO valid result: 
+recall@5: 0.0213    recall@10: 0.0327    recall@20: 0.0491    recall@50: 0.0809    ndcg@5: 0.0141    ndcg@10: 0.0178    ndcg@20: 0.0219    ndcg@50: 0.0282    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0117    map@10: 0.0132    map@20: 0.0143    map@50: 0.0153    
+09 Oct 05:04    INFO test result: 
+recall@5: 0.0208    recall@10: 0.0325    recall@20: 0.0502    recall@50: 0.0804    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0226    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0158    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:04    INFO train_loss1: 2.8158, train_loss2: 0.1043, train_loss3: 0.0800]
+09 Oct 05:05    INFO epoch 36 evaluating [time: 7.90s, valid_score: 0.049500]
+09 Oct 05:05    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0329    recall@20: 0.0495    recall@50: 0.0812    ndcg@5: 0.0142    ndcg@10: 0.0179    ndcg@20: 0.0221    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0118    map@10: 0.0133    map@20: 0.0145    map@50: 0.0155    
+09 Oct 05:05    INFO test result: 
+recall@5: 0.0210    recall@10: 0.0326    recall@20: 0.0503    recall@50: 0.0808    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0226    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0158    
+09 Oct 05:05    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:05    INFO train_loss1: 2.6923, train_loss2: 0.1033, train_loss3: 0.0798]
+09 Oct 05:05    INFO epoch 37 evaluating [time: 7.65s, valid_score: 0.049400]
+09 Oct 05:05    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0329    recall@20: 0.0494    recall@50: 0.0814    ndcg@5: 0.0142    ndcg@10: 0.0179    ndcg@20: 0.0221    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0118    map@10: 0.0133    map@20: 0.0145    map@50: 0.0155    
+09 Oct 05:05    INFO test result: 
+recall@5: 0.0209    recall@10: 0.0328    recall@20: 0.0504    recall@50: 0.0811    ndcg@5: 0.0144    ndcg@10: 0.0183    ndcg@20: 0.0228    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0137    map@20: 0.0149    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:05    INFO train_loss1: 2.5420, train_loss2: 0.1024, train_loss3: 0.0797]
+09 Oct 05:05    INFO epoch 38 evaluating [time: 7.24s, valid_score: 0.049400]
+09 Oct 05:05    INFO valid result: 
+recall@5: 0.0216    recall@10: 0.0329    recall@20: 0.0494    recall@50: 0.0813    ndcg@5: 0.0143    ndcg@10: 0.0180    ndcg@20: 0.0221    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0119    map@10: 0.0134    map@20: 0.0145    map@50: 0.0155    
+09 Oct 05:05    INFO test result: 
+recall@5: 0.0210    recall@10: 0.0331    recall@20: 0.0505    recall@50: 0.0811    ndcg@5: 0.0145    ndcg@10: 0.0184    ndcg@20: 0.0228    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:05    INFO train_loss1: 2.4011, train_loss2: 0.1016, train_loss3: 0.0794]
+09 Oct 05:06    INFO epoch 39 evaluating [time: 7.18s, valid_score: 0.049100]
+09 Oct 05:06    INFO valid result: 
+recall@5: 0.0216    recall@10: 0.0330    recall@20: 0.0491    recall@50: 0.0814    ndcg@5: 0.0143    ndcg@10: 0.0180    ndcg@20: 0.0221    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0119    map@10: 0.0134    map@20: 0.0145    map@50: 0.0155    
+09 Oct 05:06    INFO test result: 
+recall@5: 0.0211    recall@10: 0.0332    recall@20: 0.0505    recall@50: 0.0812    ndcg@5: 0.0145    ndcg@10: 0.0184    ndcg@20: 0.0228    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:06    INFO train_loss1: 2.2472, train_loss2: 0.1007, train_loss3: 0.0794]
+09 Oct 05:06    INFO epoch 40 evaluating [time: 7.28s, valid_score: 0.049100]
+09 Oct 05:06    INFO valid result: 
+recall@5: 0.0216    recall@10: 0.0330    recall@20: 0.0491    recall@50: 0.0812    ndcg@5: 0.0144    ndcg@10: 0.0181    ndcg@20: 0.0221    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:06    INFO test result: 
+recall@5: 0.0210    recall@10: 0.0337    recall@20: 0.0504    recall@50: 0.0809    ndcg@5: 0.0145    ndcg@10: 0.0186    ndcg@20: 0.0228    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:06    INFO train_loss1: 2.1304, train_loss2: 0.1000, train_loss3: 0.0793]
+09 Oct 05:06    INFO epoch 41 evaluating [time: 7.38s, valid_score: 0.049300]
+09 Oct 05:06    INFO valid result: 
+recall@5: 0.0217    recall@10: 0.0332    recall@20: 0.0493    recall@50: 0.0811    ndcg@5: 0.0144    ndcg@10: 0.0181    ndcg@20: 0.0222    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:06    INFO test result: 
+recall@5: 0.0212    recall@10: 0.0335    recall@20: 0.0503    recall@50: 0.0812    ndcg@5: 0.0146    ndcg@10: 0.0186    ndcg@20: 0.0228    ndcg@50: 0.0290    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:06    INFO train_loss1: 2.0662, train_loss2: 0.0992, train_loss3: 0.0792]
+09 Oct 05:07    INFO epoch 42 evaluating [time: 9.55s, valid_score: 0.049600]
+09 Oct 05:07    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0331    recall@20: 0.0496    recall@50: 0.0810    ndcg@5: 0.0145    ndcg@10: 0.0181    ndcg@20: 0.0223    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:07    INFO test result: 
+recall@5: 0.0212    recall@10: 0.0334    recall@20: 0.0504    recall@50: 0.0812    ndcg@5: 0.0145    ndcg@10: 0.0185    ndcg@20: 0.0228    ndcg@50: 0.0290    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0149    map@50: 0.0159    
+09 Oct 05:07    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:07    INFO train_loss1: 1.9477, train_loss2: 0.0985, train_loss3: 0.0792]
+09 Oct 05:07    INFO epoch 43 evaluating [time: 6.99s, valid_score: 0.049600]
+09 Oct 05:07    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0331    recall@20: 0.0496    recall@50: 0.0811    ndcg@5: 0.0145    ndcg@10: 0.0181    ndcg@20: 0.0223    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:07    INFO test result: 
+recall@5: 0.0210    recall@10: 0.0335    recall@20: 0.0506    recall@50: 0.0809    ndcg@5: 0.0145    ndcg@10: 0.0185    ndcg@20: 0.0229    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:07    INFO train_loss1: 1.8468, train_loss2: 0.0978, train_loss3: 0.0790]
+09 Oct 05:07    INFO epoch 44 evaluating [time: 8.11s, valid_score: 0.049300]
+09 Oct 05:07    INFO valid result: 
+recall@5: 0.0219    recall@10: 0.0330    recall@20: 0.0493    recall@50: 0.0814    ndcg@5: 0.0146    ndcg@10: 0.0182    ndcg@20: 0.0223    ndcg@50: 0.0286    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0147    map@50: 0.0157    
+09 Oct 05:07    INFO test result: 
+recall@5: 0.0211    recall@10: 0.0337    recall@20: 0.0507    recall@50: 0.0811    ndcg@5: 0.0145    ndcg@10: 0.0186    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:07    INFO train_loss1: 1.7636, train_loss2: 0.0971, train_loss3: 0.0789]
+09 Oct 05:08    INFO epoch 45 evaluating [time: 7.11s, valid_score: 0.049400]
+09 Oct 05:08    INFO valid result: 
+recall@5: 0.0219    recall@10: 0.0331    recall@20: 0.0494    recall@50: 0.0816    ndcg@5: 0.0146    ndcg@10: 0.0182    ndcg@20: 0.0223    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0147    map@50: 0.0157    
+09 Oct 05:08    INFO test result: 
+recall@5: 0.0210    recall@10: 0.0338    recall@20: 0.0506    recall@50: 0.0811    ndcg@5: 0.0145    ndcg@10: 0.0187    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0044    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:08    INFO train_loss1: 1.6691, train_loss2: 0.0965, train_loss3: 0.0788]
+09 Oct 05:08    INFO epoch 46 evaluating [time: 7.67s, valid_score: 0.049300]
+09 Oct 05:08    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0332    recall@20: 0.0493    recall@50: 0.0818    ndcg@5: 0.0145    ndcg@10: 0.0182    ndcg@20: 0.0222    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0120    map@10: 0.0136    map@20: 0.0147    map@50: 0.0157    
+09 Oct 05:08    INFO test result: 
+recall@5: 0.0211    recall@10: 0.0339    recall@20: 0.0507    recall@50: 0.0808    ndcg@5: 0.0145    ndcg@10: 0.0187    ndcg@20: 0.0229    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:08    INFO train_loss1: 1.6144, train_loss2: 0.0958, train_loss3: 0.0787]
+09 Oct 05:08    INFO epoch 47 evaluating [time: 8.44s, valid_score: 0.049300]
+09 Oct 05:08    INFO valid result: 
+recall@5: 0.0219    recall@10: 0.0333    recall@20: 0.0493    recall@50: 0.0815    ndcg@5: 0.0146    ndcg@10: 0.0182    ndcg@20: 0.0223    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0147    map@50: 0.0157    
+09 Oct 05:08    INFO test result: 
+recall@5: 0.0213    recall@10: 0.0336    recall@20: 0.0508    recall@50: 0.0811    ndcg@5: 0.0146    ndcg@10: 0.0186    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0027    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:08    INFO train_loss1: 1.5453, train_loss2: 0.0952, train_loss3: 0.0788]
+09 Oct 05:09    INFO epoch 48 evaluating [time: 7.98s, valid_score: 0.049500]
+09 Oct 05:09    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0334    recall@20: 0.0495    recall@50: 0.0814    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0137    map@20: 0.0148    map@50: 0.0158    
+09 Oct 05:09    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0338    recall@20: 0.0507    recall@50: 0.0812    ndcg@5: 0.0146    ndcg@10: 0.0186    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:09    INFO train_loss1: 1.4721, train_loss2: 0.0946, train_loss3: 0.0787]
+09 Oct 05:09    INFO epoch 49 evaluating [time: 7.42s, valid_score: 0.049800]
+09 Oct 05:09    INFO valid result: 
+recall@5: 0.0220    recall@10: 0.0335    recall@20: 0.0498    recall@50: 0.0812    ndcg@5: 0.0146    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0122    map@10: 0.0137    map@20: 0.0148    map@50: 0.0158    
+09 Oct 05:09    INFO test result: 
+recall@5: 0.0212    recall@10: 0.0339    recall@20: 0.0506    recall@50: 0.0812    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0044    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0160    
+09 Oct 05:09    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:09    INFO train_loss1: 1.4220, train_loss2: 0.0940, train_loss3: 0.0785]
+09 Oct 05:09    INFO epoch 50 evaluating [time: 7.20s, valid_score: 0.049900]
+09 Oct 05:09    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0333    recall@20: 0.0499    recall@50: 0.0813    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0157    
+09 Oct 05:09    INFO test result: 
+recall@5: 0.0213    recall@10: 0.0342    recall@20: 0.0506    recall@50: 0.0810    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+09 Oct 05:09    INFO ██ NCL--Best validation results updated!!!
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:09    INFO train_loss1: 1.3273, train_loss2: 0.0935, train_loss3: 0.0784]
+09 Oct 05:10    INFO epoch 51 evaluating [time: 8.43s, valid_score: 0.049800]
+09 Oct 05:10    INFO valid result: 
+recall@5: 0.0219    recall@10: 0.0334    recall@20: 0.0498    recall@50: 0.0812    ndcg@5: 0.0146    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0286    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0121    map@10: 0.0137    map@20: 0.0148    map@50: 0.0157    
+09 Oct 05:10    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0341    recall@20: 0.0508    recall@50: 0.0810    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0230    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0027    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:10    INFO train_loss1: 1.2949, train_loss2: 0.0929, train_loss3: 0.0783]
+09 Oct 05:10    INFO epoch 52 evaluating [time: 7.83s, valid_score: 0.049700]
+09 Oct 05:10    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0336    recall@20: 0.0497    recall@50: 0.0814    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0137    map@20: 0.0148    map@50: 0.0157    
+09 Oct 05:10    INFO test result: 
+recall@5: 0.0215    recall@10: 0.0342    recall@20: 0.0508    recall@50: 0.0807    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0230    ndcg@50: 0.0289    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0027    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:10    INFO train_loss1: 1.2220, train_loss2: 0.0924, train_loss3: 0.0784]
+09 Oct 05:10    INFO epoch 53 evaluating [time: 8.90s, valid_score: 0.049700]
+09 Oct 05:10    INFO valid result: 
+recall@5: 0.0216    recall@10: 0.0335    recall@20: 0.0497    recall@50: 0.0810    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0286    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0121    map@10: 0.0137    map@20: 0.0148    map@50: 0.0158    
+09 Oct 05:10    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0341    recall@20: 0.0509    recall@50: 0.0805    ndcg@5: 0.0147    ndcg@10: 0.0188    ndcg@20: 0.0230    ndcg@50: 0.0289    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0027    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0151    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:10    INFO train_loss1: 1.1861, train_loss2: 0.0919, train_loss3: 0.0783]
+09 Oct 05:11    INFO epoch 54 evaluating [time: 9.20s, valid_score: 0.049600]
+09 Oct 05:11    INFO valid result: 
+recall@5: 0.0215    recall@10: 0.0335    recall@20: 0.0496    recall@50: 0.0807    ndcg@5: 0.0144    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0285    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0121    map@10: 0.0137    map@20: 0.0148    map@50: 0.0157    
+09 Oct 05:11    INFO test result: 
+recall@5: 0.0213    recall@10: 0.0341    recall@20: 0.0509    recall@50: 0.0806    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0230    ndcg@50: 0.0289    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0027    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0151    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:11    INFO train_loss1: 1.1228, train_loss2: 0.0914, train_loss3: 0.0782]
+09 Oct 05:11    INFO epoch 55 evaluating [time: 9.92s, valid_score: 0.049700]
+09 Oct 05:11    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0334    recall@20: 0.0497    recall@50: 0.0808    ndcg@5: 0.0144    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0285    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0137    map@20: 0.0148    map@50: 0.0157    
+09 Oct 05:11    INFO test result: 
+recall@5: 0.0212    recall@10: 0.0341    recall@20: 0.0507    recall@50: 0.0805    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0230    ndcg@50: 0.0289    precision@5: 0.0044    precision@10: 0.0036    precision@20: 0.0027    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:11    INFO train_loss1: 1.0859, train_loss2: 0.0909, train_loss3: 0.0781]
+09 Oct 05:11    INFO epoch 56 evaluating [time: 7.57s, valid_score: 0.049800]
+09 Oct 05:11    INFO valid result: 
+recall@5: 0.0212    recall@10: 0.0335    recall@20: 0.0498    recall@50: 0.0807    ndcg@5: 0.0143    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0285    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0119    map@10: 0.0136    map@20: 0.0147    map@50: 0.0157    
+09 Oct 05:11    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0339    recall@20: 0.0506    recall@50: 0.0803    ndcg@5: 0.0147    ndcg@10: 0.0187    ndcg@20: 0.0230    ndcg@50: 0.0289    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0151    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:11    INFO train_loss1: 1.0381, train_loss2: 0.0905, train_loss3: 0.0781]
+09 Oct 05:12    INFO epoch 57 evaluating [time: 8.71s, valid_score: 0.049600]
+09 Oct 05:12    INFO valid result: 
+recall@5: 0.0213    recall@10: 0.0334    recall@20: 0.0496    recall@50: 0.0807    ndcg@5: 0.0143    ndcg@10: 0.0182    ndcg@20: 0.0223    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0119    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:12    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0341    recall@20: 0.0506    recall@50: 0.0804    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0230    ndcg@50: 0.0289    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0151    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:12    INFO train_loss1: 1.0135, train_loss2: 0.0900, train_loss3: 0.0781]
+09 Oct 05:12    INFO epoch 58 evaluating [time: 7.50s, valid_score: 0.049400]
+09 Oct 05:12    INFO valid result: 
+recall@5: 0.0215    recall@10: 0.0333    recall@20: 0.0494    recall@50: 0.0802    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0223    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0136    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:12    INFO test result: 
+recall@5: 0.0215    recall@10: 0.0343    recall@20: 0.0505    recall@50: 0.0801    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0229    ndcg@50: 0.0288    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:12    INFO train_loss1: 0.9856, train_loss2: 0.0896, train_loss3: 0.0779]
+09 Oct 05:12    INFO epoch 59 evaluating [time: 8.23s, valid_score: 0.049400]
+09 Oct 05:12    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0332    recall@20: 0.0494    recall@50: 0.0801    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0223    ndcg@50: 0.0284    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0136    map@20: 0.0147    map@50: 0.0157    
+09 Oct 05:12    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0341    recall@20: 0.0502    recall@50: 0.0800    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0288    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:13    INFO train_loss1: 0.9020, train_loss2: 0.0892, train_loss3: 0.0779]
+09 Oct 05:13    INFO epoch 60 evaluating [time: 7.43s, valid_score: 0.049100]
+09 Oct 05:13    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0331    recall@20: 0.0491    recall@50: 0.0800    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0222    ndcg@50: 0.0283    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0136    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:13    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0343    recall@20: 0.0501    recall@50: 0.0797    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:13    INFO train_loss1: 0.8880, train_loss2: 0.0888, train_loss3: 0.0779]
+09 Oct 05:13    INFO epoch 61 evaluating [time: 8.75s, valid_score: 0.049200]
+09 Oct 05:13    INFO valid result: 
+recall@5: 0.0215    recall@10: 0.0331    recall@20: 0.0492    recall@50: 0.0800    ndcg@5: 0.0144    ndcg@10: 0.0181    ndcg@20: 0.0222    ndcg@50: 0.0283    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0136    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:13    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0342    recall@20: 0.0501    recall@50: 0.0800    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0228    ndcg@50: 0.0288    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:13    INFO train_loss1: 0.8478, train_loss2: 0.0883, train_loss3: 0.0780]
+09 Oct 05:13    INFO epoch 62 evaluating [time: 8.94s, valid_score: 0.049100]
+09 Oct 05:13    INFO valid result: 
+recall@5: 0.0215    recall@10: 0.0332    recall@20: 0.0491    recall@50: 0.0800    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0222    ndcg@50: 0.0283    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0136    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:13    INFO test result: 
+recall@5: 0.0215    recall@10: 0.0341    recall@20: 0.0501    recall@50: 0.0801    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0288    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:14    INFO train_loss1: 0.8018, train_loss2: 0.0880, train_loss3: 0.0778]
+09 Oct 05:14    INFO epoch 63 evaluating [time: 7.67s, valid_score: 0.049100]
+09 Oct 05:14    INFO valid result: 
+recall@5: 0.0215    recall@10: 0.0331    recall@20: 0.0491    recall@50: 0.0799    ndcg@5: 0.0144    ndcg@10: 0.0182    ndcg@20: 0.0222    ndcg@50: 0.0283    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0136    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:14    INFO test result: 
+recall@5: 0.0213    recall@10: 0.0341    recall@20: 0.0501    recall@50: 0.0797    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:14    INFO train_loss1: 0.7844, train_loss2: 0.0876, train_loss3: 0.0777]
+09 Oct 05:14    INFO epoch 64 evaluating [time: 7.36s, valid_score: 0.049200]
+09 Oct 05:14    INFO valid result: 
+recall@5: 0.0217    recall@10: 0.0330    recall@20: 0.0492    recall@50: 0.0798    ndcg@5: 0.0145    ndcg@10: 0.0181    ndcg@20: 0.0222    ndcg@50: 0.0283    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:14    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0341    recall@20: 0.0501    recall@50: 0.0799    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0149    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:14    INFO train_loss1: 0.7611, train_loss2: 0.0872, train_loss3: 0.0776]
+09 Oct 05:14    INFO epoch 65 evaluating [time: 7.75s, valid_score: 0.049500]
+09 Oct 05:14    INFO valid result: 
+recall@5: 0.0216    recall@10: 0.0330    recall@20: 0.0495    recall@50: 0.0797    ndcg@5: 0.0144    ndcg@10: 0.0181    ndcg@20: 0.0223    ndcg@50: 0.0282    precision@5: 0.0044    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:14    INFO test result: 
+recall@5: 0.0213    recall@10: 0.0340    recall@20: 0.0501    recall@50: 0.0798    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:15    INFO train_loss1: 0.7116, train_loss2: 0.0869, train_loss3: 0.0777]
+09 Oct 05:15    INFO epoch 66 evaluating [time: 8.21s, valid_score: 0.049500]
+09 Oct 05:15    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0330    recall@20: 0.0495    recall@50: 0.0792    ndcg@5: 0.0143    ndcg@10: 0.0181    ndcg@20: 0.0223    ndcg@50: 0.0281    precision@5: 0.0043    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:15    INFO test result: 
+recall@5: 0.0214    recall@10: 0.0340    recall@20: 0.0502    recall@50: 0.0799    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0288    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:15    INFO train_loss1: 0.7198, train_loss2: 0.0865, train_loss3: 0.0776]
+09 Oct 05:15    INFO epoch 67 evaluating [time: 8.61s, valid_score: 0.049500]
+09 Oct 05:15    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0328    recall@20: 0.0495    recall@50: 0.0793    ndcg@5: 0.0143    ndcg@10: 0.0181    ndcg@20: 0.0223    ndcg@50: 0.0282    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:15    INFO test result: 
+recall@5: 0.0213    recall@10: 0.0337    recall@20: 0.0502    recall@50: 0.0796    ndcg@5: 0.0146    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:15    INFO train_loss1: 0.6751, train_loss2: 0.0862, train_loss3: 0.0776]
+09 Oct 05:15    INFO epoch 68 evaluating [time: 8.27s, valid_score: 0.049300]
+09 Oct 05:15    INFO valid result: 
+recall@5: 0.0214    recall@10: 0.0327    recall@20: 0.0493    recall@50: 0.0793    ndcg@5: 0.0143    ndcg@10: 0.0180    ndcg@20: 0.0222    ndcg@50: 0.0281    precision@5: 0.0043    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0155    
+09 Oct 05:15    INFO test result: 
+recall@5: 0.0215    recall@10: 0.0337    recall@20: 0.0499    recall@50: 0.0796    ndcg@5: 0.0147    ndcg@10: 0.0187    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0123    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:16    INFO train_loss1: 0.6340, train_loss2: 0.0858, train_loss3: 0.0776]
+09 Oct 05:16    INFO epoch 69 evaluating [time: 8.73s, valid_score: 0.049200]
+09 Oct 05:16    INFO valid result: 
+recall@5: 0.0216    recall@10: 0.0329    recall@20: 0.0492    recall@50: 0.0794    ndcg@5: 0.0144    ndcg@10: 0.0181    ndcg@20: 0.0222    ndcg@50: 0.0282    precision@5: 0.0044    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0120    map@10: 0.0135    map@20: 0.0146    map@50: 0.0156    
+09 Oct 05:16    INFO test result: 
+recall@5: 0.0215    recall@10: 0.0339    recall@20: 0.0502    recall@50: 0.0796    ndcg@5: 0.0146    ndcg@10: 0.0186    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:16    INFO train_loss1: 0.6251, train_loss2: 0.0855, train_loss3: 0.0775]
+09 Oct 05:16    INFO epoch 70 evaluating [time: 8.50s, valid_score: 0.049100]
+09 Oct 05:16    INFO valid result: 
+recall@5: 0.0218    recall@10: 0.0330    recall@20: 0.0491    recall@50: 0.0794    ndcg@5: 0.0146    ndcg@10: 0.0182    ndcg@20: 0.0222    ndcg@50: 0.0282    precision@5: 0.0044    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0121    map@10: 0.0136    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:16    INFO test result: 
+recall@5: 0.0216    recall@10: 0.0336    recall@20: 0.0501    recall@50: 0.0798    ndcg@5: 0.0147    ndcg@10: 0.0186    ndcg@20: 0.0228    ndcg@50: 0.0287    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0150    map@50: 0.0159    
+WARNING clustering 23033 points to 1000 centroids: please provide at least 39000 training points
+09 Oct 05:16    INFO train_loss1: 0.6088, train_loss2: 0.0852, train_loss3: 0.0774]
+09 Oct 05:16    INFO epoch 71 evaluating [time: 7.48s, valid_score: 0.049200]
+09 Oct 05:16    INFO valid result: 
+recall@5: 0.0219    recall@10: 0.0329    recall@20: 0.0492    recall@50: 0.0792    ndcg@5: 0.0145    ndcg@10: 0.0181    ndcg@20: 0.0222    ndcg@50: 0.0282    precision@5: 0.0044    precision@10: 0.0033    precision@20: 0.0025    precision@50: 0.0016    map@5: 0.0121    map@10: 0.0135    map@20: 0.0147    map@50: 0.0156    
+09 Oct 05:16    INFO test result: 
+recall@5: 0.0215    recall@10: 0.0338    recall@20: 0.0499    recall@50: 0.0796    ndcg@5: 0.0146    ndcg@10: 0.0186    ndcg@20: 0.0227    ndcg@50: 0.0286    precision@5: 0.0045    precision@10: 0.0035    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0138    map@20: 0.0149    map@50: 0.0159    
+09 Oct 05:16    INFO +++++Finished training, best eval result in epoch 50
+09 Oct 05:16    INFO best valid result: recall@5: 0.0218    recall@10: 0.0333    recall@20: 0.0499    recall@50: 0.0813    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0157    
+09 Oct 05:16    INFO test result: recall@5: 0.0213    recall@10: 0.0342    recall@20: 0.0506    recall@50: 0.0810    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+09 Oct 05:16    INFO ████Current BEST████:
+Parameters: ['seed']=(999,),
+Valid: recall@5: 0.0218    recall@10: 0.0333    recall@20: 0.0499    recall@50: 0.0813    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0157    ,
+Test: recall@5: 0.0213    recall@10: 0.0342    recall@20: 0.0506    recall@50: 0.0810    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+
+
+
+09 Oct 05:16    INFO 
+============All Over=====================
+09 Oct 05:16    INFO Parameters: ['seed']=(999,),
+ best valid: recall@5: 0.0218    recall@10: 0.0333    recall@20: 0.0499    recall@50: 0.0813    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0157    ,
+ best test: recall@5: 0.0213    recall@10: 0.0342    recall@20: 0.0506    recall@50: 0.0810    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+09 Oct 05:16    INFO 
+
+█████████████ BEST ████████████████
+09 Oct 05:16    INFO 	Parameters: ['seed']=(999,),
+Valid: recall@5: 0.0218    recall@10: 0.0333    recall@20: 0.0499    recall@50: 0.0813    ndcg@5: 0.0145    ndcg@10: 0.0183    ndcg@20: 0.0224    ndcg@50: 0.0287    precision@5: 0.0044    precision@10: 0.0034    precision@20: 0.0025    precision@50: 0.0017    map@5: 0.0121    map@10: 0.0136    map@20: 0.0148    map@50: 0.0157    ,
+Test: recall@5: 0.0213    recall@10: 0.0342    recall@20: 0.0506    recall@50: 0.0810    ndcg@5: 0.0146    ndcg@10: 0.0188    ndcg@20: 0.0229    ndcg@50: 0.0290    precision@5: 0.0045    precision@10: 0.0036    precision@20: 0.0026    precision@50: 0.0017    map@5: 0.0122    map@10: 0.0139    map@20: 0.0150    map@50: 0.0160    
+
+
