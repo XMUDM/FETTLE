@@ -1,3 +1,10 @@
+# Who To Align With: Feedback-Oriented Multi-Modal Alignment in Recommendation Systems
+This repository is the official implementation of "Who To Align With: Feedback-Oriented Multi-Modal Alignment in Recommendation Systems".
+Our paper is accepted by  SIGIR2024! 🎉
+
+# Framework
+![1712569859631](https://github.com/XMUDM/FETTLE/assets/77662961/8f802d8b-4a77-4b8d-a31b-32f28c16affc)
+
 # quickly used
 You only need to import the losses: CLALoss and ILALoss into the your code.
 e.g.
