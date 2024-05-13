@@ -3,7 +3,7 @@ This repository is the official implementation of "Who To Align With: Feedback-O
 Our paper is accepted by  SIGIR2024! 🎉
 
 # Framework
-![1712569859631](https://github.com/XMUDM/FETTLE/assets/77662961/8f802d8b-4a77-4b8d-a31b-32f28c16affc)
+![1712569859631](https://github.com/XMUDM/FETTLE/assets/IMG_00001.jpeg)
 
 # quickly used
 You only need to import the losses: CLALoss and ILALoss into the your code.
