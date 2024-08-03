@@ -5,7 +5,7 @@ Our paper is accepted by  SIGIR2024! 🎉
 # Framework
 ![https://github.com/XMUDM/FETTLE/assets/IMG_00001.jpeg](https://github.com/XMUDM/FETTLE/blob/main/assets/IMG_00001.jpeg)
 
-# quickly used
+# Quickly used
 You only need to import the losses: CLALoss and ILALoss into the your code.
 e.g.
 ```python
@@ -18,6 +18,8 @@ cla_loss = self.cla_loss(user_embeddings, item_embeddings,
 
 loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss
 ```
-
-
-
+# Results
+## main 
+![https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-180842%402x.png](https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-180842%402x.png)
+## ablation study
+![https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-181404@2x.png](https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-181404@2x.png)
