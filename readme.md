@@ -18,8 +18,5 @@ cla_loss = self.cla_loss(user_embeddings, item_embeddings,
 
 loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss
 ```
-# Results
-## main 
-![https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-180842%402x.png](https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-180842%402x.png)
-## ablation study
+# Performance of each component
 ![https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-181404@2x.png](https://github.com/XMUDM/FETTLE/blob/main/assets/WX20240803-181404@2x.png)
