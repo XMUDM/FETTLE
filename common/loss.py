@@ -1,15 +1,9 @@
-# coding: utf-8
-from typing import Any, Optional, Tuple
-
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from kmeans_pytorch import kmeans as KMeans
-from torch import cosine_similarity, Tensor
-from torch.autograd import Function
 from torch_scatter import scatter_add
-
 
 class CLALoss(nn.Module):
     def __init__(self, K: int, D: int, gamma: float) -> None:
@@ -23,11 +17,39 @@ class CLALoss(nn.Module):
         self.K = K
         self.D = D
         self.gamma = gamma
-        
-        '''code implement details will be released after paper published'''
+        self.feat2code = nn.Linear(D, K, bias=False)
+        self.ii2code = nn.Linear(D, K, bias=False)
+
 
 
         self.gamma = nn.Parameter(torch.ones([]) * gamma)
+
+    def get_refined_label(self,users,items,neg_items,user_embeddings,id_embeddings,text_embeddings,image_embeddings):
+        with torch.no_grad():
+            user_embeddings = F.normalize(user_embeddings[users],dim=1)
+            id_embeddings = F.normalize(id_embeddings[items], dim=1)
+            image_embeddings = F.normalize(image_embeddings[items], dim=1)
+            text_embeddings = F.normalize(text_embeddings[items], dim=1)
+            id_embeddings_neg = F.normalize(id_embeddings[neg_items], dim=1)
+            image_embeddings_neg = F.normalize(image_embeddings[neg_items], dim=1)
+            text_embeddings_neg = F.normalize(text_embeddings[neg_items], dim=1)
+
+            code_user= user_embeddings  @ self.feat2code.weight.t()
+            code_item = id_embeddings @ self.feat2code.weight.t()
+            code_item_neg = id_embeddings_neg @ self.feat2code.weight.t()
+            code_id_ii = id_embeddings @ self.ii2code.weight.t()
+            code_id_ii_neg = id_embeddings_neg @ self.ii2code.weight.t()
+            code_image_ii = image_embeddings @ self.ii2code.weight.t()
+            code_image_ii_neg = image_embeddings_neg @ self.ii2code.weight.t()
+            code_text_ii = text_embeddings @ self.ii2code.weight.t()
+            code_text_ii_neg = text_embeddings_neg @ self.ii2code.weight.t()
+            alpha = (code_id_ii+code_image_ii+code_text_ii)/3
+
+            alpha_neg =  (code_id_ii_neg+code_image_ii_neg+code_text_ii_neg)/3
+            y_hat = alpha*torch.sum(code_user*code_item,dim=1)-alpha_neg*torch.sum(code_user*code_item_neg,dim=1)
+            y_hat =( y_hat+torch.ones_like(y_hat)) /2
+            # 计算id2image的差异性
+        return y_hat.detach()
 
 
     def sinkhorn(self, out):
@@ -55,11 +77,42 @@ class CLALoss(nn.Module):
         Q *= B  # the colomns must sum to 1 so that Q is an assignment
         return Q.t()
 
+    def kmeans(self,out):
+
+        cluster_labels,_ = KMeans(X=out, num_clusters=self.K, distance='euclidean', device=out.device).long().to(out.device)
+        # 对cluster_centers_重排，从0开始
+
+
+        # cluster_centers = torch.from_numpy(cluster_labels).to(out.device)
+        # 对cluster_centers_重排，从0开始
+        # _, cluster_centers = torch.unique(cluster_centers, sorted=True, return_inverse=True, dim=0)
+
+        return cluster_labels
+
     def forward(self, user_embeddings, id_embeddings, image_embeddings, text_embeddings, users, items,mode='SwAV',user_code=None,item_code=None,image_code=None,text_code=None):
-        
-        '''
-        part code will be released after paper published
-        '''
+        with torch.no_grad():
+            self.gamma.clamp_(0.01, 0.99)
+        # 归一化
+
+        user_embeddings = F.normalize(user_embeddings[users], dim=1)
+        id_embeddings = F.normalize(id_embeddings[items], dim=1)
+        image_embeddings = F.normalize(image_embeddings[items], dim=1)
+        text_embeddings = F.normalize(text_embeddings[items], dim=1)
+
+        with torch.no_grad():
+            w = self.feat2code.weight.data.clone()
+            w = nn.functional.normalize(w, dim=1, p=2)
+            self.feat2code.weight.copy_(w)
+            w = self.ii2code.weight.data.clone()
+            w = nn.functional.normalize(w, dim=1, p=2)
+            self.ii2code.weight.copy_(w)
+
+        code_user = user_embeddings @ self.feat2code.weight.t()
+        code_id = id_embeddings @ self.feat2code.weight.t()
+        code_id_ii = id_embeddings @ self.ii2code.weight.t()
+        code_image_ii = image_embeddings @ self.ii2code.weight.t()
+        code_text_ii = text_embeddings @ self.ii2code.weight.t()
+
 
         with torch.no_grad():
             if mode=='SwAV':
@@ -74,8 +127,6 @@ class CLALoss(nn.Module):
                 q_id_ii = q_id
                 q_image_ii = image_code.detach()
                 q_text_ii = text_code.detach()
-
-
 
 
         gamma = self.gamma
@@ -105,27 +156,10 @@ class CLALoss(nn.Module):
 
         return loss / 2 + align_loss / 6
 
+
+def normalize(embeddings):
+    mean = embeddings.mean(dim=0)
+    std = embeddings.std(dim=0)
+    return (embeddings - mean) / (std+1e-6)
+
 class ILADTLoss(nn.Module):
-    def __init__(self, dim=64, gamma=0.007):
-        super(CLCRLossUltra, self).__init__()
-        # self.logit_scale =  nn.Parameter(torch.ones([]) * np.log(1 / gamma))
-        self.temp = nn.Parameter(gamma * torch.ones([]))
-        '''code implement details will be released after paper published'''
-
-    def compute_loss(self,user_embeddings,item_embeddings,image_embeddings,text_embeddings,user_id,item_id):
-        with torch.no_grad():
-            self.temp.clamp_(0.001, 0.5)
-        ids = item_id.detach().cpu().numpy()
-        '''
-        part code will be released after paper published
-        '''
-        loss = 0
-        dt_loss = 0
-
-        '''
-        loss compute details will be released after paper published
-        '''
-        return loss  + dt_loss
-
-    def forward(self,user_embeddings,item_embeddings,image_embeddings,text_embeddings,user_id,item_id):
-        return self.compute_loss(user_embeddings,item_embeddings,image_embeddings,text_embeddings,user_id,item_id)
