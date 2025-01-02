@@ -1,5 +1,4 @@
 # coding: utf-8
-# @email  : enoche.chow@gmail.com
 import os
 from typing import Any, Optional, Tuple
 
