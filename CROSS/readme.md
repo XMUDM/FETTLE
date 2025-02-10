@@ -1,4 +1,4 @@
-# Who To Align With: Feedback-Oriented Multi-Modal Alignment in Recommendation Systems  
+# CROSS: Feedback-Oriented Multi-Modal Dynamic Alignment in Recommendation Systems    
 This repository is the official implementation of "CROSS: Feedback-Oriented Multi-Modal Dynamic Alignment in Recommendation Systems".   
 It is an extension of our privious work FETTLE.  
 # Framework
