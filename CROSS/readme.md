@@ -27,7 +27,7 @@ loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna
 
 # Different Metric and K
 We present the Recall, NDCG, and Precision of both NCL and FREEDOM (the best-performing backbones in CF and MRS) on two different platform datasets, Baby and TikTok, with K=5 (where K<10).
-| Models     | Baby Recall@5 | Baby NDCG@5 | Baby Precision@5 | Tiktok Recall@5 | Tiktok NDCG@5 | Tiktok Precision@5 |
+| Models     | Baby Recall@5 | Baby NDCG@5 | Baby Precision@5 | TikTok Recall@5 | TiTtok NDCG@5 | TikTok Precision@5 |
 |------------|---------------|-------------|------------------|-----------------|---------------|---------------------|
 | NCL        | 0.0294        | 0.0194      | 0.0066           | 0.0404          | 0.0279        | 0.0081              |
 | +FETTLE    | 0.0346        | 0.0231      | 0.0076           | 0.0427          | 0.0271        | 0.0085              |
