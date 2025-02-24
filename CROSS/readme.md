@@ -10,7 +10,7 @@ e.g.
 ```python
 class YourModel:
     def __init__(config):
-        your model's original config
+        your model's original initialization
         # add
         self.ila_dt_loss = ILALoss(leaky_bi=True) # set leaky_bi=True --> IDLA
         self.cla_loss = CLALoss(...)
