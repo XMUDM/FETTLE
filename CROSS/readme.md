@@ -9,30 +9,29 @@ You only need to import the losses: CLALoss, ILALoss and CNALoss into the your c
 e.g.
 ```python
 class YourModel:
-def __init__(config):
-    your model's original config
-    # add
-    self.ila_dt_loss = ILALoss(leaky_bi=True) # set leaky_bi=True --> IDLA
-    self.cla_loss = CLALoss(...)
-    self.cna_loss = CNALoss(...)
-
-
-def calculate_loss():
-
-    loss = your model's original loss
-
-    # <user, pos_item> are interacted user-item pairs.
-    ila_dt_loss = self.ila_dt_loss(u_emb, i_emb,  
-                                v_emb, t_emb, user, pos_item)  
+    def __init__(config):
+        your model's original config
+        # add
+        self.ila_dt_loss = ILALoss(leaky_bi=True) # set leaky_bi=True --> IDLA
+        self.cla_loss = CLALoss(...)
+        self.cna_loss = CNALoss(...)
     
-    cla_loss = self.cla_loss(user_embeddings, item_embeddings,        
-                                v_emb, t_emb, user, pos_item)  
+    def calculate_loss(u_emb, i_emb, v_emb, t_emb, user, pos_item):
+        ...
+        loss = your model's original loss
+        # add
+        # <user, pos_item> are interacted user-item pairs.
+        ila_dt_loss = self.ila_dt_loss(u_emb, i_emb,  
+                                    v_emb, t_emb, user, pos_item)  
+        
+        cla_loss = self.cla_loss(user_embeddings, item_embeddings,        
+                                    v_emb, t_emb, user, pos_item)  
+        
+        cna_loss = self.cna_loss( item_embeddings, v_emb, t_emb, pos_item)        
+        
     
-    cna_loss = self.cna_loss( item_embeddings, v_emb, t_emb, item)        
-    
-
-    
-    loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna_weight * cna_loss
+        
+        loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna_weight * cna_loss
 
 ```
 
