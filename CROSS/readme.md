@@ -5,26 +5,35 @@ It is an extension of our privious work FETTLE. 
 ![Framework](https://github.com/XMUDM/FETTLE/blob/main/CROSS/figs/framework.png)                
 
 # Quickly used  
-You only need to import the losses: CLALoss,ILALoss and CNALoss into the your code.  
+You only need to import the losses: CLALoss, ILALoss and CNALoss into the your code.  
 e.g.
 ```python
+class YourModel:
+def __init__(config):
+    your model's original config
+    # add
+    self.ila_dt_loss = ILALoss(leaky_bi=True) # set leaky_bi=True --> IDLA
+    self.cla_loss = CLALoss(...)
+    self.cna_loss = CNALoss(...)
 
-self.ila_dt_loss = ILALoss(leaky_bi=True) # set leaky_bi=True --> IDLA
-self.cla_loss = CLALoss(...)
-self.cna_loss = CNALoss(...)
 
-# <user, pos_item> are interacted user-item pairs.
-ila_dt_loss = self.ila_dt_loss(u_emb, i_emb,  
-                            v_emb, t_emb, user, pos_item)  
+def calculate_loss():
 
-cla_loss = self.cla_loss(user_embeddings, item_embeddings,        
-                            v_emb, t_emb, user, pos_item)  
+    loss = your model's original loss
 
-cna_loss = self.cna_loss( item_embeddings, v_emb, t_emb, item)        
+    # <user, pos_item> are interacted user-item pairs.
+    ila_dt_loss = self.ila_dt_loss(u_emb, i_emb,  
+                                v_emb, t_emb, user, pos_item)  
+    
+    cla_loss = self.cla_loss(user_embeddings, item_embeddings,        
+                                v_emb, t_emb, user, pos_item)  
+    
+    cna_loss = self.cna_loss( item_embeddings, v_emb, t_emb, item)        
+    
 
-loss = your model's original loss
+    
+    loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna_weight * cna_loss
 
-loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna_weight * cna_loss
 ```
 
 # Different Metric and K
