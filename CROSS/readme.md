@@ -22,6 +22,8 @@ cla_loss = self.cla_loss(user_embeddings, item_embeddings,       
 
 cna_loss = self.cna_loss( item_embeddings, v_emb, t_emb, item)        
 
+loss = your model's original loss
+
 loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna_weight * cna_loss
 ```
 
