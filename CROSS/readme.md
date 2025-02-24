@@ -29,8 +29,6 @@ class YourModel:
         
         cna_loss = self.cna_loss( item_embeddings, v_emb, t_emb, pos_item)        
         
-    
-        
         loss +=  self.iladt_weight * ila_dt_loss + self.cla_weight * cla_loss + self.cna_weight * cna_loss
 
 ```
