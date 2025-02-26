@@ -34,7 +34,7 @@ class YourModel:
 ```
 
 # Different Metric and K
-We present the Recall, NDCG, and Precision of both NCL and FREEDOM (the best-performing backbones in CF and MRS) on two different platform datasets, Baby and TikTok, with K=5 (where K<10).
+We also present the Recall, NDCG, and Precision of both NCL and FREEDOM (the best-performing backbones in CF and MRS) on two different platform datasets, Baby and TikTok, with K=5 (where K<10).
 | Models     | Baby Recall@5 | Baby NDCG@5 | Baby Precision@5 | TikTok Recall@5 | TikTok NDCG@5 | TikTok Precision@5 |
 |------------|---------------|-------------|------------------|-----------------|---------------|---------------------|
 | NCL        | 0.0294        | 0.0194      | 0.0066           | 0.0404          | 0.0279        | 0.0081              |
