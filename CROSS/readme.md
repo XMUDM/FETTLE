@@ -4,7 +4,7 @@ It is an extension of our previous work FETTLE. 
 # Framework
 ![Framework](https://github.com/XMUDM/FETTLE/blob/main/CROSS/figs/framework.png)                
 
-# Quickly use  
+# Quick Start 
 You only need to import the losses: CLALoss, ILALoss, and CNALoss into your code.  
 e.g.
 ```python
