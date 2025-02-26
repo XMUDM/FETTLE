@@ -1,11 +1,11 @@
 # CROSS: Feedback-Oriented Multi-Modal Dynamic Alignment in Recommendation Systems    
-This repository is the official implementation of "CROSS: Feedback-Oriented Multi-Modal Dynamic Alignment in Recommendation Systems".   
-It is an extension of our privious work FETTLE.  
+This repository is the official implementation of "CROSS: Feedback-Oriented Multi-Modal Dynamic Alignment in Recommendation Systems."   
+It is an extension of our previous work FETTLE.  
 # Framework
 ![Framework](https://github.com/XMUDM/FETTLE/blob/main/CROSS/figs/framework.png)                
 
-# Quickly used  
-You only need to import the losses: CLALoss, ILALoss and CNALoss into the your code.  
+# Quickly use  
+You only need to import the losses: CLALoss, ILALoss, and CNALoss into your code.  
 e.g.
 ```python
 class YourModel:
