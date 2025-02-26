@@ -5,8 +5,8 @@ Our paper is accepted by  SIGIR2024! 🎉
 # Framework
 ![https://github.com/XMUDM/FETTLE/assets/IMG_00001.jpeg](https://github.com/XMUDM/FETTLE/blob/main/assets/IMG_00001.jpeg)
 
-# Quickly used
-You only need to import the losses: CLALoss and ILALoss into the your code.
+# Quickly use
+You only need to import the losses CLALoss and ILALoss into your code.
 e.g.
 ```python
 # <user, pos_item> are interacted user-item pairs.
