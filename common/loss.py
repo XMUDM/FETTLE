@@ -163,3 +163,135 @@ def normalize(embeddings):
     return (embeddings - mean) / (std+1e-6)
 
 class ILADTLoss(nn.Module):
+    def __init__(self, dim=64, gamma=0.007):
+        super(ILALoss, self).__init__()
+        # self.logit_scale =  nn.Parameter(torch.ones([]) * np.log(1 / gamma))
+        self.temp = nn.Parameter(gamma * torch.ones([]))
+        self.i2t_map = nn.Linear(dim, dim, bias=False)
+        self.t2i_map = nn.Linear(dim, dim, bias=False)
+        self.i2d_map = nn.Linear(dim, dim, bias=False)
+        self.d2i_map = nn.Linear(dim, dim, bias=False)
+        self.t2d_map = nn.Linear(dim, dim, bias=False)
+        self.d2t_map = nn.Linear(dim, dim, bias=False)
+
+    def forward(self,user_embeddings,item_embeddings,image_embeddings,text_embeddings,user_id,item_id,epoch_idx=None):
+        with torch.no_grad():
+            self.temp.clamp_(0.001, 0.5)
+
+        item_id,indice = torch.sort(item_id)
+        unique_items,remap_indexs, counts = torch.unique(item_id,return_inverse=True,return_counts=True,sorted=True)
+        user_id = user_id[indice]
+
+        user_embeddings = user_embeddings / user_embeddings.norm(dim=1, keepdim=True)
+        image_embeddings = image_embeddings / image_embeddings.norm(dim=1, keepdim=True)
+        text_embeddings = text_embeddings / text_embeddings.norm(dim=1, keepdim=True)
+        item_embeddings = item_embeddings / item_embeddings.norm(dim=1, keepdim=True)
+
+        uid_scores = torch.sum(user_embeddings[user_id] *
+                               item_embeddings[item_id], dim=1)
+        uii_scores = torch.sum(user_embeddings[user_id] *
+                                 image_embeddings[item_id], dim=1)
+        uit_scores = torch.sum(user_embeddings[user_id] *
+                                    text_embeddings[item_id], dim=1)
+
+  
+        with torch.no_grad():
+            uid_scores = scatter_add(uid_scores / counts[remap_indexs], remap_indexs, dim=0)
+            uii_scores = scatter_add(uii_scores / counts[remap_indexs], remap_indexs, dim=0)
+            uit_scores = scatter_add(uit_scores / counts[remap_indexs], remap_indexs, dim=0)
+
+
+            t_i_mask = uii_scores > uit_scores
+            i_t_mask = uit_scores > uii_scores
+            i_d_mask = uid_scores > uii_scores
+            d_i_mask = uii_scores > uid_scores
+            t_d_mask = uid_scores > uit_scores
+            d_t_mask = uit_scores > uid_scores
+
+        item_embeddings = item_embeddings[unique_items] # 7k -> unique items
+        image_embeddings = image_embeddings[unique_items]
+        text_embeddings = text_embeddings[unique_items]
+
+        image_features_norm = image_embeddings
+        text_features_norm = text_embeddings
+        cf_features_norm = item_embeddings
+
+        image_features_i2t = self.i2t_map(image_embeddings) + image_embeddings
+        image_features_i2d = self.i2d_map(image_embeddings) + image_embeddings
+        text_features_t2i = self.t2i_map(text_embeddings) + text_embeddings
+        text_features_t2d = self.t2d_map(text_embeddings) + text_embeddings
+        cf_features_d2i = self.d2i_map(item_embeddings) + item_embeddings
+        cf_features_d2t = self.d2t_map(item_embeddings) + item_embeddings
+
+
+        image_features_norm_i2t = image_features_i2t / image_features_i2t.norm(dim=1, keepdim=True)
+        image_features_norm_i2d = image_features_i2d / image_features_i2d.norm(dim=1, keepdim=True)
+        text_features_norm_t2i = text_features_t2i / text_features_t2i.norm(dim=1, keepdim=True)
+        text_features_norm_t2d = text_features_t2d / text_features_t2d.norm(dim=1, keepdim=True)
+        cf_features_norm_d2i = cf_features_d2i / cf_features_d2i.norm(dim=1, keepdim=True)
+        cf_features_norm_d2t = cf_features_d2t / cf_features_d2t.norm(dim=1, keepdim=True)
+
+
+        logits_image_cf = (image_features_norm_i2d @ cf_features_norm.t().detach())[i_d_mask] / self.temp
+        logits_cf_image =  (cf_features_norm_d2i @ image_features_norm.t().detach())[d_i_mask] / self.temp
+        logits_cf_text = (cf_features_norm_d2t @ text_features_norm.t().detach())[d_t_mask]  / self.temp
+        logits_text_cf = (text_features_norm_t2d @ cf_features_norm.t().detach())[t_d_mask] / self.temp
+        logits_image_text = (image_features_norm_i2t @ text_features_norm.detach().t())[i_t_mask]  / self.temp
+        logits_text_image =  (text_features_norm_t2i @ image_features_norm.detach().t())[t_i_mask]  / self.temp
+
+        # 判断是否存在nan
+
+        loss = 0
+
+
+        labels = torch.arange(unique_items.shape[0]).to(logits_image_cf.device)
+
+        if t_i_mask.sum() > 0:
+            t2i_loss = F.cross_entropy(logits_text_image,labels[t_i_mask], reduction='sum')
+            loss+=t2i_loss
+        if i_t_mask.sum() > 0:
+            i2t_loss = F.cross_entropy(logits_image_text,labels[i_t_mask], reduction='sum')
+            loss += i2t_loss
+        if i_d_mask.sum() > 0:
+            i2d_loss = F.cross_entropy(logits_image_cf,labels[i_d_mask], reduction='sum')
+            loss += i2d_loss
+        if d_i_mask.sum() > 0:
+            d2i_loss = F.cross_entropy(logits_cf_image,labels[d_i_mask], reduction='sum')
+            loss +=d2i_loss
+        if t_d_mask.sum() > 0:
+            t2d_loss = F.cross_entropy(logits_text_cf,labels[t_d_mask], reduction='sum')
+            loss += t2d_loss
+        if d_t_mask.sum() > 0:
+            d2t_loss = F.cross_entropy(logits_cf_text,labels[d_t_mask], reduction='sum')
+            loss += d2t_loss
+        loss = loss / (unique_items.shape[0])
+
+        loss_align = 0
+        user_embeddings = user_embeddings.detach()
+        if i_t_mask.sum() > 0:
+            pos_score = torch.sum(user_embeddings[user_id] * image_features_norm_i2t[remap_indexs],dim=1)
+            pos_score = scatter_add(pos_score/counts[remap_indexs],remap_indexs,dim=0)
+            loss_align += -torch.mean(pos_score[i_t_mask] - uii_scores[i_t_mask])
+        if t_i_mask.sum() > 0:
+            pos_score = torch.sum(user_embeddings[user_id] * text_features_norm_t2i[remap_indexs],dim=1)
+            pos_score = scatter_add(pos_score/counts[remap_indexs],remap_indexs,dim=0)
+            loss_align += -torch.mean(pos_score[t_i_mask] - uit_scores[t_i_mask])
+        if i_d_mask.sum() > 0:
+            pos_score = torch.sum(user_embeddings[user_id] * image_features_norm_i2d[remap_indexs],dim=1)
+            pos_score = scatter_add(pos_score/counts[remap_indexs],remap_indexs,dim=0)
+            loss_align += -torch.mean(pos_score[i_d_mask] - uii_scores[i_d_mask])
+        if d_i_mask.sum() > 0:
+            pos_score = torch.sum(user_embeddings[user_id] * cf_features_norm_d2i[remap_indexs],dim=1)
+            pos_score = scatter_add(pos_score/counts[remap_indexs],remap_indexs,dim=0)
+            loss_align += -torch.mean(pos_score[d_i_mask] - uid_scores[d_i_mask])
+        if t_d_mask.sum() > 0:
+            pos_score = torch.sum(user_embeddings[user_id] * text_features_norm_t2d[remap_indexs],dim=1)
+            pos_score = scatter_add(pos_score/counts[remap_indexs],remap_indexs,dim=0)
+            loss_align += -torch.mean(pos_score[t_d_mask] - uit_scores[t_d_mask])
+        if d_t_mask.sum() > 0:
+            pos_score = torch.sum(user_embeddings[user_id] * cf_features_norm_d2t[remap_indexs],dim=1)
+            pos_score = scatter_add(pos_score/counts[remap_indexs],remap_indexs,dim=0)
+            loss_align += -torch.mean(pos_score[d_t_mask] - uid_scores[d_t_mask])
+        loss_align = loss_align / 6
+
+        return loss +  loss_align
